@@ -54,10 +54,10 @@ class Scrape:
             original_price = product.select_one("span[class='q6wH9+Ht7LxnxrEgD22BCQ==']")
 
             if discount_price and original_price:
-                discount_price = discount_price
-                original_price = original_price
+                discount_price = discount_price.get_text(strip=True)
+                original_price = original_price.get_text(strip=True)
             else:
-                original_price = product.select_one("div[class='_67d6E1xDKIzw+i2D2L0tjw==']")
+                original_price = product.select_one("div[class='_67d6E1xDKIzw+i2D2L0tjw==']").get_text(strip=True)
                 discount_price = original_price
 
             seller = product.select_one("span[class='T0rpy-LEwYNQifsgB-3SQw== pC8DMVkBZGW7-egObcWMFQ== flip']").get_text()
@@ -78,14 +78,14 @@ class Scrape:
         if not results:
             raise Exception("Product not found.")
         
-        # for result in results:
-        #     print(result)
+        for result in results:
+            print(result)
 
         return {
             "product_name": name if name else "Unknown",
             "product_url": product_url,
-            "original_price": original_price.get_text(strip=True) if original_price else "Unknown",
-            "discount_price": discount_price.get_text(strip=True) if discount_price else "Unknown"
+            "original_price": original_price if original_price else "Unknown",
+            "discount_price": discount_price if discount_price else "Unknown"
         }
 
 def clean_price(price):
