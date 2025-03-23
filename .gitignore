@@ -9,7 +9,7 @@ __pychache__/
 
 # django
 db.sqlite3
-**/migrations
+**/migrations/
 *.log
 
 # celery
