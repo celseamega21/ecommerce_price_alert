@@ -2,12 +2,11 @@ from typing import NamedTuple, Optional
 import requests
 from bs4 import BeautifulSoup
 
-class ProductScraper(NamedTuple):
+class Products(NamedTuple):
     name : str
     discount_price : str
     original_price: Optional[str]
     seller : str
-    image_url : str
     sold : str
 
 class Scrape:
@@ -61,15 +60,13 @@ class Scrape:
                 discount_price = original_price
 
             seller = product.select_one("span[class='T0rpy-LEwYNQifsgB-3SQw== pC8DMVkBZGW7-egObcWMFQ== flip']").get_text()
-            image_url = product.select_one("div.css-bqlp8e.responsive img").get("src")
             sold = product.select_one("span[class='se8WAnkjbVXZNA8mT+Veuw==']").get_text()
 
-            product_result = ProductScraper(
+            product_result = Products(
                 name=name,
                 discount_price=discount_price,
                 original_price=original_price,
                 seller=seller,
-                image_url=image_url,
                 sold=sold
             )
 

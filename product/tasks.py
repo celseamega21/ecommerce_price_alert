@@ -21,6 +21,7 @@ def check_price(self):
             continue
 
         new_price = scraper.get("discount_price")
+        original_price = scraper.get("discount_price")
 
         logger.info(f"Product: {product.name} New Price: {new_price} Last Price: {product.last_price}")
 
@@ -30,11 +31,11 @@ def check_price(self):
             body_html = f"""
             <html>
             <body>
-                <h2>Price Drop Alert for {product_name_escape}</h2>
-                <p>Hello,</p>
-                <p>The product you're tracking has dropped in price!</p>
+                <h2>Hurry! The product you're tracking has dropped in price!</h2>
+                <p>Hello, {product.email}</p>
+                <p>The price of {product_name_escape} has dropped, and we thought you'd love to know.</p>
 
-                <h3>{product_name_escape}</h3>
+                <p><strong>Original Price: </strong><s>{original_price}</s></p>
                 <p><strong>Current Price: </strong>{new_price}</p>
             
                 <p>

@@ -9,6 +9,6 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
     "check-price-every-6-hours": {
         "task": "product.tasks.check_price",
-        "schedule": crontab(minute=0, hour="*/6"),
+        "schedule": crontab(minute=0, hour="*/12"),
     },
 }
