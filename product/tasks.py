@@ -21,10 +21,7 @@ def check_price(self):
             continue
 
         new_price = scraper.get("discount_price")
-        original_price = scraper.get("discount_price")
-
-        logger.info(f"Product: {product.name} New Price: {new_price} Last Price: {product.last_price}")
-
+        
         if clean_price(new_price) < clean_price(product.last_price):
             product_name_escape = escape(product.name)
 
@@ -33,9 +30,9 @@ def check_price(self):
             <body>
                 <h2>Hurry! The product you're tracking has dropped in price!</h2>
                 <p>Hello, {product.email}</p>
-                <p>The price of {product_name_escape} has dropped, and we thought you'd love to know.</p>
+                <p>The price of <strong>{product_name_escape}</strong> has dropped, and we thought you'd love to know!</p>
 
-                <p><strong>Original Price: </strong><s>{original_price}</s></p>
+                <p><strong>Previous Price: </strong><s>{product.last_price}</s></p>
                 <p><strong>Current Price: </strong>{new_price}</p>
             
                 <p>
@@ -61,7 +58,7 @@ def check_price(self):
                 logger.error(f"Failed to send email to {product.email}: {e}")
                 raise self.retry(exc=e)
     
-        # save new price to database
-        PriceHistory.objects.create(product=product, price=new_price)
-        product.last_price = new_price
-        product.save()
+            # save new price to database
+            PriceHistory.objects.create(product=product, price=new_price)
+            product.last_price = new_price
+            product.save()

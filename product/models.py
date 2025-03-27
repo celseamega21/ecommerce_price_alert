@@ -2,7 +2,7 @@ from django.db import models
 
 class Product(models.Model):
     name = models.CharField(max_length=150)
-    url = models.URLField(unique=True)
+    url = models.URLField(max_length=500, unique=True)
     last_price = models.CharField(max_length=30)
     email = models.EmailField()
 

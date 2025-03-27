@@ -29,7 +29,6 @@ class Scrape:
         encoded_product_name = self.product_name.replace(" ", "%20")
         url = f"https://www.tokopedia.com/search?st=&q={encoded_product_name}"
         print(f"Searching for {self.product_name}")
-        # print(f"URL: {url}")
 
         soup = self.get_soup(url)
 
@@ -38,26 +37,24 @@ class Scrape:
             return results
         
         products = soup.select("div[data-testid='divSRPContentProducts']")
-
-        get_url = soup.find("a", class_="oQ94Awb6LlTiGByQZo8Lyw== IM26HEnTb-krJayD-R0OHw==")
-        product_url = get_url.get("href")
-
         if not products:
             print("No products found on the search page")
             return results
-
+        
         for product in products:
-            name = product.select_one("span[class='_0T8-iGxMpV6NEsYEhwkqEg==']").get_text()
+            link = product.find("a", class_="oQ94Awb6LlTiGByQZo8Lyw== IM26HEnTb-krJayD-R0OHw==").get("href")
+            soup = self.get_soup(link)
+            name = soup.select_one("div.css-1nylpq2").get_text(strip=True)
 
-            discount_price = product.select_one("div[class='_67d6E1xDKIzw+i2D2L0tjw== t4jWW3NandT5hvCFAiotYg==']")
-            original_price = product.select_one("span[class='q6wH9+Ht7LxnxrEgD22BCQ==']")
-
-            if discount_price and original_price:
-                discount_price = discount_price.get_text(strip=True)
+            original_price = soup.select_one("div.original-price span:nth-of-type(2)")
+            discount_price = soup.select_one("div.price")
+            
+            if original_price and discount_price:
                 original_price = original_price.get_text(strip=True)
+                discount_price = discount_price.get_text(strip=True)
             else:
-                original_price = product.select_one("div[class='_67d6E1xDKIzw+i2D2L0tjw==']").get_text(strip=True)
-                discount_price = original_price
+                discount_price = discount_price.get_text(strip=True)
+                original_price = discount_price
 
             seller = product.select_one("span[class='T0rpy-LEwYNQifsgB-3SQw== pC8DMVkBZGW7-egObcWMFQ== flip']").get_text()
             sold = product.select_one("span[class='se8WAnkjbVXZNA8mT+Veuw==']").get_text()
@@ -80,7 +77,7 @@ class Scrape:
 
         return {
             "product_name": name if name else "Unknown",
-            "product_url": product_url,
+            "product_url": link,
             "original_price": original_price if original_price else "Unknown",
             "discount_price": discount_price if discount_price else "Unknown"
         }
