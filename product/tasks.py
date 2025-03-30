@@ -10,7 +10,7 @@ logger = get_task_logger(__name__)
 
 @shared_task(bind=True, autoretry_for=(Exception,), retry_backoff=True, max_retries=5)
 def check_price(self):
-    """Send an email when the product price is dropped."""
+    """Check product prices periodically and send an email when the product price is dropped."""
 
     products = Product.objects.all()
 
@@ -48,7 +48,7 @@ def check_price(self):
                 send_mail(
                     f"Price Drop Alert!!!",
                     "",
-                    "alonica@gmail.com",
+                    None,
                     [product.email],
                     fail_silently=False,
                     html_message=body_html

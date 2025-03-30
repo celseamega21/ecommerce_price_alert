@@ -43,12 +43,13 @@ class Scrape:
         
         for product in products:
             link = product.find("a", class_="oQ94Awb6LlTiGByQZo8Lyw== IM26HEnTb-krJayD-R0OHw==").get("href")
+           
+            # fetch data from detail product page
             soup = self.get_soup(link)
             name = soup.select_one("div.css-1nylpq2").get_text(strip=True)
-
             original_price = soup.select_one("div.original-price span:nth-of-type(2)")
             discount_price = soup.select_one("div.price")
-            
+
             if original_price and discount_price:
                 original_price = original_price.get_text(strip=True)
                 discount_price = discount_price.get_text(strip=True)
@@ -56,6 +57,7 @@ class Scrape:
                 discount_price = discount_price.get_text(strip=True)
                 original_price = discount_price
 
+            # data taken from search results page
             seller = product.select_one("span[class='T0rpy-LEwYNQifsgB-3SQw== pC8DMVkBZGW7-egObcWMFQ== flip']").get_text()
             sold = product.select_one("span[class='se8WAnkjbVXZNA8mT+Veuw==']").get_text()
 
