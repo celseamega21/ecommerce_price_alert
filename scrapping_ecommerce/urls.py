@@ -19,6 +19,6 @@ from django.urls import path
 from product.views import ProductView
 
 urlpatterns = [
-    path('price-tracking/', ProductView.as_view(), name='track-price'),
+    path('/', ProductView.as_view(), name='track-price'),
     path('admin/', admin.site.urls),
 ]
