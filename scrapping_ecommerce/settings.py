@@ -28,7 +28,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -83,8 +83,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'celery_result_backend',
-        'USER': 'root',
-        'PASSWORD': os.getenv("PASSWORD"),
+        'USER': 'celsea',
+        'PASSWORD': os.getenv("DB_PASSWORD"),
         'HOST': '127.0.0.1', 
         'PORT': 3306
     }

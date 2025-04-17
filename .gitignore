@@ -17,6 +17,7 @@ celerybeat-schedule
 celerybeat.pid
 celery.log
 
+# project
 scrape/__pycache__/
 scrape/*.pyc
 scrape/*.pyo
@@ -24,3 +25,6 @@ tasks/__pycache__/
 tasks/*.pyc
 tasks/*.pyo
 product/selector.py
+
+# IDE
+.vscode/
