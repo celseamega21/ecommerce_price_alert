@@ -3,7 +3,7 @@ FROM python:3.10
 WORKDIR /scrapping_ecommerce
 
 COPY requirements.txt .
-RUN pip install --no--chace-dir -r requirements.txt
+RUN pip install --no--cache-dir -r requirements.txt
 
 COPY . .
 
