@@ -26,9 +26,10 @@ load_dotenv()
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['ecommerce-price-alert.up.railway.app']
+# ALLOWED_HOSTS = ['ecommerce-price-alert.up.railway.app']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 # Application definition
 
@@ -84,7 +85,7 @@ DATABASES = {
         'NAME': 'celery_result_backend',
         'USER': 'celsea',
         'PASSWORD': os.getenv("DB_PASSWORD"),
-        'HOST': '127.0.0.1', 
+        'HOST': 'db', 
         'PORT': 3306
     }
 }
