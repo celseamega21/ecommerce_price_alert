@@ -81,10 +81,10 @@ WSGI_APPLICATION = 'scrapping_ecommerce.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'celery_result_backend',
-        'USER': 'celsea',
-        'PASSWORD': os.getenv("DB_PASSWORD"),
-        'HOST': 'db', 
+        'NAME': 'railway',
+        'USER': 'root',
+        'PASSWORD': os.getenv("DB_PASS_RAILWAY"),
+        'HOST': 'mysql.railway.internal', 
         'PORT': 3306
     }
 }
