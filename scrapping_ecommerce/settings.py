@@ -80,16 +80,16 @@ WSGI_APPLICATION = 'scrapping_ecommerce.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'celery_result_backend',
-        'USER': 'root',
-        'PASSWORD': os.getenv("DB_PASSWORD"),
-        'HOST': os.getenv('MYSQLHOST', 'mysql.railway.internal'), 
-        'PORT': os.getenv('MYSQLPORT', '3306'),
-    }
+    'default': dj_database_url.config(default=os.getenv("DATABASE_URL")),
+        # 'ENGINE': 'django.db.backends.mysql',
+        # 'NAME': os.getenv("MYSQLDATABASE", "celery_result_backend"),
+        # 'USER': os.getenv("MYSQLROOT", "root"),
+        # 'PASSWORD': os.getenv("MYSQLPASSWORD"),
+        # 'HOST': os.getenv('MYSQLHOST', 'mysql.railway.internal'), 
+        # 'PORT': os.getenv('MYSQLPORT', '3306'),
 }
 
+DATABASES['default']['ENGINE'] = 'django.db.backends.mysql'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
