@@ -15,7 +15,7 @@ def check_price(self):
     products = Product.objects.all()
 
     for product in products:
-        scraper = Scrape(product.name).scrape_tokped()
+        scraper = Scrape(product.url).scrape_tokped()
         if not scraper:
             logger.warning(f"Failed to scrape price for {product.name}")
             continue
@@ -23,14 +23,12 @@ def check_price(self):
         new_price = scraper.get("discount_price")
         
         if clean_price(new_price) < clean_price(product.last_price):
-            product_name_escape = escape(product.name)
-
             body_html = f"""
             <html>
             <body>
                 <h2>Hurry! The product you're tracking has dropped in price!</h2>
                 <p>Hello, {product.email}</p>
-                <p>The price of <strong>{product_name_escape}</strong> has dropped, and we thought you'd love to know!</p>
+                <p>The price of <strong>{product.name}</strong> has dropped, and we thought you'd love to know!</p>
 
                 <p><strong>Previous Price: </strong><s>{product.last_price}</s></p>
                 <p><strong>Current Price: </strong>{new_price}</p>

@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ecommerce-price-alert.up.railway.app']
+ALLOWED_HOSTS = ['ecommerce-price-alert.up.railway.app', '127.0.0.1']
 
 # Application definition
 
@@ -60,7 +60,7 @@ ROOT_URLCONF = 'scrapping_ecommerce.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')], 
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
