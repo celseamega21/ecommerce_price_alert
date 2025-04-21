@@ -4,6 +4,7 @@ from celery.schedules import crontab
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scrapping_ecommerce.settings")
 app = Celery("scrapping_ecommerce")
+app.conf.broker_connection_retry_on_startup = True
 app.config_from_object("django.conf:settings", namespace="CELERY")
 app.autodiscover_tasks()
 app.conf.beat_schedule = {
