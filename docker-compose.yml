@@ -7,14 +7,30 @@ services:
     env_file: .env
     environment:
       - DATABASE_URL=${DATABASE_URL}
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
     ports:
       - "8000:8000"
-
-  nginx:
-    image: nginx:latest
-    ports: 
-      - "80:80"
-    volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
-      - web
+      - redis
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+
+  celery:
+    build: .
+    command: celery -A scrapping_ecommerce worker -l info
+    volumes:
+      - .:/scrapping_ecommerce
+    depends_on:
+      - redis
+      
+  celery-beat:
+    build: .
+    command: celery -A scrapping_ecommerce beat -l info
+    volumes:
+      - .:/scrapping_ecommerce
+    depends_on:
+      - redis
