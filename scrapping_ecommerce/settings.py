@@ -130,6 +130,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Celery settings
 CELERY_BROKER_URL = "redis://localhost:6379"
 CELERY_RESULT_BACKEND = "django-db"
+CELERY_WORKER_HIJACK_ROOT_LOGGER = False
+CELERY_WORKER_LOG_LEVEL = 'INFO'
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
