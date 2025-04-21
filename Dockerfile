@@ -9,4 +9,6 @@ COPY . .
 
 RUN python manage.py collectstatic --noinput
 
-CMD ["gunicorn", "scrapping_ecommerce.wsgi:application", "--bind", "0.0.0.0:8000"]
+EXPOSE 8000
+
+ENTRYPOINT ["gunicorn", "scrapping_ecommerce.wsgi:application", "--bind", "0.0.0.0:8000"]
