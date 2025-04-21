@@ -3,41 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{title}}</title>
+    <title>{{ title }}</title>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center; /* vertical center */
-            align-items: center;     /* horizontal center */
+        h1 {
             text-align: center;
-            background-color:rgb(165, 197, 164);
         }
-
-        main {
-            margin-top: 1rem;
-        }
-
-        button {
-            padding: 0.5rem 1rem;
-            font-size: 1rem;
-            cursor: pointer;
-        }
-
-        a {
-            text-decoration: none;
+        body {
+            background-color:rgb(232, 253, 231);
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>{{title}}</h1>
-    </header>
+    <h1>{{ title }}</h1>
     <main>
-        <p>{{ description }}</p>
+        <h4>{{ description }}</h4>
+        <h3>🛍️ How to Use</h3>
+        <ul>
+            <li>Click the <em>"Start Tracking"</em> button below.</li>
+            <li>Paste the <strong>Tokopedia product URL</strong> you want to track.</li>
+            <li>Fill in your <strong>email</strong> (this is where the alert will be sent)</li>
+            <li>Click <strong>POST</strong> button to start tracking.</li>
+        </ul>
+
+        <h3>💡 Tips</h3>
+        <ul>
+            <li>You can see the products you are tracking by opening this link:</li>
+            <span><code>https://ecommerce-price-alert.up.railway.app/api/products/?email=youremail@example.com</code></span>
+            <br>
+            <span>*Replace <code>youremail@example.com</code> with your own email.</span>
+            <li>To edit or delete a product, go to:</li>
+            <span><code>https://ecommerce-price-alert.up.railway.app/api/products/12</code></span>
+            <br>
+            <span>*Replace <code>12</code> with your product ID.</span>
+            <li>Use <strong>PUT</strong> to update it or <strong>DELETE</strong> to remove it.</li>
+        </ul>
+
         <a href="{% url 'product-list-create' %}">
             <button>Start Tracking</button>
         </a>
