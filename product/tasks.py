@@ -61,9 +61,3 @@ def check_price(self):
             PriceHistory.objects.create(product=product, price=new_price)
             product.last_price = new_price
             product.save()
-
-@shared_task
-def check_time():
-    now = datetime.now(timezone.utc).isoformat() 
-    print(f"Celery current UTC time: {now}")
-    return now
