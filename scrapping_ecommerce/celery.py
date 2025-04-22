@@ -8,7 +8,7 @@ app.conf.broker_connection_retry_on_startup = True
 app.config_from_object("django.conf:settings", namespace="CELERY")
 app.autodiscover_tasks()
 app.conf.beat_schedule = {
-    "check-price-every-6-hours": {
+    "check-price-every-4-hours": {
         "task": "product.tasks.check_price",
         "schedule": crontab(minute=0, hour="*/4"),
     },
