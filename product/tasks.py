@@ -5,6 +5,7 @@ from django.utils.html import escape
 from .scrape import Scrape
 from .models import PriceHistory, Product
 from .scrape import clean_price
+from datetime import datetime, timezone
 
 logger = get_task_logger(__name__)
 
@@ -60,3 +61,9 @@ def check_price(self):
             PriceHistory.objects.create(product=product, price=new_price)
             product.last_price = new_price
             product.save()
+
+@shared_task
+def check_time():
+    now = datetime.now(timezone.utc).isoformat() 
+    print(f"Celery current UTC time: {now}")
+    return now
