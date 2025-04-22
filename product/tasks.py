@@ -23,6 +23,7 @@ def check_price(self):
         new_price = scraper.get("discount_price")
         
         if clean_price(new_price) < clean_price(product.last_price):
+        # if clean_price(new_price) > 0:
             body_html = f"""
             <html>
             <body>
