@@ -61,3 +61,6 @@ def check_price(self):
             PriceHistory.objects.create(product=product, price=new_price)
             product.last_price = new_price
             product.save()
+
+        else:
+            logger.info(f"Price for {product.name} has not dropped. Current price: {new_price}, Last price: {product.last_price}")
