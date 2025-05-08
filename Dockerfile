@@ -1,6 +1,6 @@
 FROM python:3.10
 
-WORKDIR /scrapping_ecommerce
+WORKDIR /app
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
