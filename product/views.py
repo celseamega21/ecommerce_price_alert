@@ -45,8 +45,7 @@ class ProductListCreateView(generics.ListCreateAPIView):
         # save price to database
         PriceHistory.objects.create(product=product, price=scraper["discount_price"])
 
-        serializer = ProductOutputSerializers(product)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response({"message": "Product successfully tracked!"}, status=status.HTTP_201_CREATED)
 
 class ProductUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):    
     def put(self, request, id):
