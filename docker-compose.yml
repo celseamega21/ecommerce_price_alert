@@ -3,7 +3,7 @@ version: '3.8'
 services:
   web:
     build: .
-    command: bash -c "sleep 10 && python manage.py migrate && python manage.py collectstatic --noinput && gunicorn scrapping_ecommerce.wsgi:application --bind 0.0.0.0:8000"
+    command: bash -c "sleep 10 && python manage.py migrate && python manage.py collectstatic --noinput && gunicorn scrapping_ecommerce.wsgi:application --bind 0.0.0.0:5001"
     env_file: .env
     volumes:
       - .:/app
@@ -12,7 +12,7 @@ services:
       - db
       - redis
     ports:
-      - "5001:8000"
+      - "5001:5001"
 
   db:
     image: mysql:8.0
