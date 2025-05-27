@@ -25,6 +25,8 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
 
   redis:
     image: redis:alpine
