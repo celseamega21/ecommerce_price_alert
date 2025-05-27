@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class Product(models.Model):
     name = models.CharField(max_length=150)
-    url = models.URLField(max_length=500, unique=True)
+    url = models.URLField(max_length=500)
     last_price = models.CharField(max_length=30)
     email = models.EmailField()
 
