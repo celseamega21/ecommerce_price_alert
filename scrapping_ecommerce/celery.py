@@ -5,6 +5,8 @@ from celery.schedules import crontab
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scrapping_ecommerce.settings")
 app = Celery("scrapping_ecommerce")
 app.conf.broker_connection_retry_on_startup = True
+app.conf.broker_url = os.environ.get("CELERY_BROKER_URL")
+app.conf.result_backend = os.environ.get("CELERY_RESULT_BACKEND")
 app.config_from_object("django.conf:settings", namespace="CELERY")
 app.conf.broker_heartbeat = 60
 app.conf.worker_heartbeat_interval = 60
